@@ -13,7 +13,7 @@ namespace {
 constexpr unsigned upper_bin_power(const std::size_t n)
 {
     unsigned i = 0;
-    while ((1UL << i) < n) {
+    while ((static_cast<std::size_t>(1) << i) < n) {
         ++i;
     }
     return i;
@@ -79,7 +79,7 @@ struct LFRUTest : ::testing::Test
 
     static constexpr std::size_t biggest_element = std::max(sizeof(Point), sizeof(String));
     static constexpr unsigned min_power = 2;
-    static constexpr std::size_t fit_size = std::max(1UL << min_power, biggest_element);
+    static constexpr std::size_t fit_size = std::max(static_cast<std::size_t>(1) << min_power, biggest_element);
     static constexpr std::size_t min_block_count = upper_bin_power(2 * cache_size + 1);
     static constexpr unsigned max_power = upper_bin_power(fit_size) + min_block_count;
 
